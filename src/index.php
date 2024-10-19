@@ -6,17 +6,17 @@
 <body>
 
 <?php
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
 header('Content-Type: text/html; charset=iso-8859-1');
 
 
 
 echo 'Versao Atual do PHP: ' . phpversion() . '<br>';
 
-$servername = "54.234.153.24";
+$servername = "db";
 $username = "root";
-$password = "Senha123";
-$database = "meubanco";
+$password = "dio-lab-123";
+$database = "dio-lab";
 
 // Criar conexão
 

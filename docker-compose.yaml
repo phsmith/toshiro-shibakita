@@ -1,0 +1,36 @@
+services:
+  nginx:
+    build: ./config/nginx/
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./src/:/var/www/html/
+
+  php-fpm-1: &php
+    build: ./config/php-fpm/
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - ./src/:/var/www/html/
+
+  php-fpm-2:
+    <<: *php
+    environment:
+      - PORT=9001
+    expose:
+      - 9001
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dio-lab-123
+      MYSQL_DATABASE: dio-lab
+    volumes:
+      - data:/var/lib/mysql
+      - ./config/mariadb/banco.sql:/docker-entrypoint-initdb.d/banco.sql
+
+volumes:
+  data:
